@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git & GitHub Notes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Git & GitHub: Beginner to Advanced Notes</h1>
+      <p>Learn the core concepts, commands, workflows, and advanced techniques for Git and GitHub.</p>
+    </div>
+  </header>
+
+  <nav class="toc container">
+    <strong>Contents</strong>
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#git-basics">Git Basics</a></li>
+      <li><a href="#github-overview">GitHub Overview</a></li>
+      <li><a href="#branching-merging">Branching & Merging</a></li>
+      <li><a href="#pull-requests">Pull Requests</a></li>
+      <li><a href="#advanced-git">Advanced Git</a></li>
+      <li><a href="#workflows">Common Workflows</a></li>
+      <li><a href="#best-practices">Best Practices</a></li>
+      <li><a href="#command-cheatsheet">Command Cheatsheet</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section id="intro">
+      <h2>1. Introduction</h2>
+      <p>Git is a distributed version control system for tracking changes in files. GitHub is an online platform that hosts Git repositories, providing collaboration features like pull requests, issues, and project tracking.</p>
+      <p>With Git, developers can:</p>
+      <ul>
+        <li>Track changes to code over time</li>
+        <li>Collaborate with others through branches and merges</li>
+        <li>Recover previous versions of a project</li>
+      </ul>
+    </section>
+
+    <section id="git-basics">
+      <h2>2. Git Basics</h2>
+      <h3>2.1 Repositories</h3>
+      <p>A Git repository stores project history and metadata in a <code>.git</code> folder. It can be local on your machine or remote on a server.</p>
+
+      <h3>2.2 Initializing a Repository</h3>
+      <pre><code>git init</code></pre>
+      <p>Creates a new Git repository in the current folder.</p>
+
+      <h3>2.3 Checking Status</h3>
+      <pre><code>git status</code></pre>
+      <p>Shows modified, staged, and untracked files.</p>
+
+      <h3>2.4 Adding and Committing</h3>
+      <pre><code>git add .
+git commit -m "Initial commit"</code></pre>
+      <p><code>git add</code> stages changes, and <code>git commit</code> records them with a message.</p>
+
+      <h3>2.5 Viewing History</h3>
+      <pre><code>git log</code></pre>
+      <p>Displays commit history. Add <code>--oneline</code> for a shorter view.</p>
+    </section>
+
+    <section id="github-overview">
+      <h2>3. GitHub Overview</h2>
+      <h3>3.1 What GitHub Provides</h3>
+      <ul>
+        <li>Remote repository hosting</li>
+        <li>Branch management and pull requests</li>
+        <li>Issue tracking and project boards</li>
+        <li>CI/CD integrations and code reviews</li>
+      </ul>
+      <h3>3.2 Connecting Local Git to GitHub</h3>
+      <pre><code>git remote add origin https://github.com/username/repo.git
+ git push -u origin main</code></pre>
+      <p>Use SSH if you prefer secure keys:</p>
+      <pre><code>git remote add origin git@github.com:username/repo.git</code></pre>
+    </section>
+
+    <section id="branching-merging">
+      <h2>4. Branching & Merging</h2>
+      <p>Branches allow parallel work without affecting the main line of development.</p>
+      <h3>Create a branch</h3>
+      <pre><code>git branch feature/login</code></pre>
+      <h3>Switch branches</h3>
+      <pre><code>git checkout feature/login</code></pre>
+      <h3>Create and switch in one step</h3>
+      <pre><code>git switch -c feature/login</code></pre>
+      <h3>Merge a branch</h3>
+      <pre><code>git checkout main
+git merge feature/login</code></pre>
+      <p>If there are conflicts, Git marks the files and you resolve them manually.</p>
+    </section>
+
+    <section id="pull-requests">
+      <h2>5. Pull Requests</h2>
+      <p>Pull requests are GitHub’s review mechanism for proposed changes. They let maintainers inspect code, comment, and merge when ready.</p>
+      <h3>Key Pull Request steps</h3>
+      <ol>
+        <li>Push your branch to GitHub</li>
+        <li>Open a pull request from the branch to the target branch</li>
+        <li>Describe the change clearly</li>
+        <li>Respond to review comments</li>
+        <li>Merge once approved</li>
+      </ol>
+      <p>Use draft pull requests for work in progress, and keep each PR focused on one issue.</p>
+    </section>
+
+    <section id="advanced-git">
+      <h2>6. Advanced Git</h2>
+      <h3>6.1 Rebasing</h3>
+      <p>Rebase applies commits from one branch onto another, creating a cleaner history.</p>
+      <pre><code>git checkout feature/login
+git rebase main</code></pre>
+      <p>Use rebasing carefully on local branches. Avoid rebasing shared history.</p>
+
+      <h3>6.2 Interactive Rebase</h3>
+      <pre><code>git rebase -i HEAD~4</code></pre>
+      <p>Rewrite commits to squash, reorder, or edit commit messages.</p>
+
+      <h3>6.3 Cherry-pick</h3>
+      <pre><code>git cherry-pick a1b2c3d</code></pre>
+      <p>Apply a specific commit from another branch into the current branch.</p>
+
+      <h3>6.4 Stashing</h3>
+      <pre><code>git stash
+ git stash pop</code></pre>
+      <p>Temporarily save incomplete work, switch context, and restore it later.</p>
+
+      <h3>6.5 Resetting</h3>
+      <p>Three reset modes:</p>
+      <ul>
+        <li><code>git reset --soft</code>: keep changes staged</li>
+        <li><code>git reset --mixed</code>: keep working tree changes unstaged</li>
+        <li><code>git reset --hard</code>: discard all changes</li>
+      </ul>
+
+      <h3>6.6 Tags</h3>
+      <pre><code>git tag -a v1.0 -m "Release 1.0"
+ git push origin v1.0</code></pre>
+      <p>Tags mark releases or important points in history.</p>
+    </section>
+
+    <section id="workflows">
+      <h2>7. Common Workflows</h2>
+      <h3>7.1 Feature Branch Workflow</h3>
+      <p>Use a branch per feature, merge into <code>main</code> once complete.</p>
+      <h3>7.2 GitHub Flow</h3>
+      <ol>
+        <li>Create a branch</li>
+        <li>Commit changes</li>
+        <li>Open a pull request</li>
+        <li>Review and merge</li>
+      </ol>
+      <h3>7.3 Git Flow</h3>
+      <p>A structured approach with <code>develop</code>, <code>release</code>, and <code>hotfix</code> branches.</p>
+      <h3>7.4 Fork & Pull Model</h3>
+      <p>Used in open source: contributors fork the repo, push branches to their fork, then create pull requests to the upstream repository.</p>
+    </section>
+
+    <section id="best-practices">
+      <h2>8. Best Practices</h2>
+      <ul>
+        <li>Write clear commit messages</li>
+        <li>Keep commits small and focused</li>
+        <li>Use branches for features and fixes</li>
+        <li>Pull remote changes before starting work</li>
+        <li>Review diffs before committing and pushing</li>
+        <li>Use .gitignore to exclude build artifacts and secrets</li>
+      </ul>
+    </section>
+
+    <section id="command-cheatsheet">
+      <h2>9. Command Cheatsheet</h2>
+      <div class="grid">
+        <div>
+          <h3>Repository Setup</h3>
+          <pre><code>git init
+git clone <repo-url>
+ git remote -v</code></pre>
+        </div>
+        <div>
+          <h3>Workflow</h3>
+          <pre><code>git add <file>
+git commit -m "message"
+git push
+git pull</code></pre>
+        </div>
+        <div>
+          <h3>Branches</h3>
+          <pre><code>git branch
+git branch <name>
+git checkout <name>
+git switch <name>
+git merge <name></code></pre>
+        </div>
+        <div>
+          <h3>Advanced</h3>
+          <pre><code>git stash
+git rebase main
+git reset --hard
+git cherry-pick <hash></code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Created for learning Git and GitHub from fundamentals to advanced usage.</p>
+    </div>
+  </footer>
+</body>
+</html>
