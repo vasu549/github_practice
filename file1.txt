@@ -1,5 +1,2 @@
-my
-name
-is
-srinivasula
-rao
+hello world iam vasu  
+hello world iam vasubhai  
